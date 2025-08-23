@@ -11,7 +11,9 @@ class TaskBase(BaseModel):
 
 
 class TaskCreate(BaseModel):
-    pass
+    title: Optional[str] = Field(default=None, min_length=1, max_length=200)
+    description: Optional[str] = Field(default=None, max_length=10_000)
+    status: Optional[TaskStatus] = None
 
 
 class TaskUpdate(BaseModel):
