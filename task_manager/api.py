@@ -23,7 +23,7 @@ async def get_task_endpoint(task=Depends(get_existing_task)):
 
 
 @router.get("/", response_model=TaskList)
-async def list_tasks_endpoint(params: TaskQuery, session: SessionDep):
+async def list_tasks_endpoint(session: SessionDep, params: TaskQuery = Depends()):
     items, total = await list_tasks(session, params)
     return TaskList(
         items=items,
