@@ -1,20 +1,12 @@
 from __future__ import annotations
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from contextlib import asynccontextmanager
 
-from .config import settings
-from .db import Base, engine
-from .api import router as tasks_router
+from task_manager.core.config import get_settings
+from task_manager.api.routers.tasks import router as tasks_router
 
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
-    yield
-
-    await engine.dispose()
+settings = get_settings()
 
 
 def create_app() -> FastAPI:
@@ -23,7 +15,6 @@ def create_app() -> FastAPI:
         version="0.1.0",
         docs_url="/docs",
         redoc_url="/redoc",
-        lifespan=lifespan,
     )
 
     app.add_middleware(
