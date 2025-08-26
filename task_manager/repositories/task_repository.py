@@ -7,7 +7,6 @@ from sqlalchemy import select, delete
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from task_manager.db.models.task import Task
-from task_manager.services.utils import get_existing_task
 
 
 class TaskRepository:
@@ -33,7 +32,7 @@ class TaskRepository:
         return list(res.scalars())
 
     async def update(self, task_id: UUID, data: dict) -> Task:
-        task = await get_existing_task(task_id, self.session)
+        task = await self.get(task_id)
         for k, v in data.items():
             setattr(task, k, v)
         await self.session.commit()
