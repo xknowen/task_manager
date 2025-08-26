@@ -1,6 +1,5 @@
 from uuid import UUID
 
-from sqlalchemy.ext.asyncio import AsyncSession
 from task_manager.repositories.task_repository import TaskRepository
 from task_manager.schemas.tasks import TaskCreate, TaskUpdate, TaskOut
 
