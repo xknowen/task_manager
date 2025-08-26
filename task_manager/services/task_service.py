@@ -6,8 +6,8 @@ from task_manager.schemas.tasks import TaskCreate, TaskUpdate, TaskOut
 
 
 class TaskService:
-    def __init__(self, session: AsyncSession):
-        self.repo = TaskRepository(session)
+    def __init__(self, task_repository: TaskRepository):
+        self.repo = task_repository
 
     async def create(self, payload: TaskCreate) -> TaskOut:
         task = await self.repo.create(payload.model_dump())
