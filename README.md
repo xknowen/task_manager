@@ -1,7 +1,7 @@
 # Task Manager API
 
 Task Manager API — это асинхронный REST API сервис для управления задачами. Проект реализован на FastAPI с
-использованием SQLAlchemy и PostgreSQL.
+использованием SQLAlchemy и SQLite.
 
 ## Основные возможности
 
