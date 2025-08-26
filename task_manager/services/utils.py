@@ -5,6 +5,8 @@ from sqlalchemy import select
 
 from task_manager.db.models.task import Task
 from task_manager.db.dependencies import SessionDep
+from task_manager.repositories.dependencies import RepositoryDep
+from task_manager.services.task_service import TaskService
 
 
 async def get_existing_task(task_id: UUID, session: SessionDep) -> Task:
@@ -13,3 +15,7 @@ async def get_existing_task(task_id: UUID, session: SessionDep) -> Task:
     if not task:
         raise HTTPException(status_code=404, detail="Task not found")
     return task
+
+
+async def get_task_service(repository: RepositoryDep) -> TaskService:
+    return TaskService(repository)
